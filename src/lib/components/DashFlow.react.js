@@ -151,17 +151,24 @@ const Flow = (props) => {
     };
 
     // Add ref for ReactFlow instance
-    const reactFlowInstance = useRef(null);
+    const [rfInstance, setRfInstance] = useState(null);
 
-    // Effect to fit view when nodes or edges change
+    // Handle initialization
+    const onInit = useCallback((instance) => {
+        setRfInstance(instance);
+    }, []);
+
+    // Effect to fit view when nodes/edges change
     useEffect(() => {
-            if (reactFlowInstance.current && (nodes.length > 0 || edges.length > 0)) {
-                reactFlowInstance.current.fitView({
-                    padding: 0.2,  // Add some padding around the elements
-                    duration: 200  // Smooth animation duration in ms
+        if (rfInstance && (nodes.length > 0 || edges.length > 0)) {
+            setTimeout(() => {
+                rfInstance.fitView({
+                    padding: 0.2,
+                    duration: 200
                 });
-            }
-        }, [nodes, edges]);
+            }, 0);
+        }
+    }, [rfInstance, nodes, edges]);
     
     // Process nodes to handle Dash components
     const processedNodes = processDashComponents(nodes);
@@ -198,7 +205,7 @@ const Flow = (props) => {
     return (
         <div id={id} style={containerStyle} className={className}>
             <ReactFlow
-                ref={reactFlowInstance} 
+                onInit={onInit}
                 nodes={processedNodes}
                 edges={edges}
                 onNodesChange={onNodesChange}
