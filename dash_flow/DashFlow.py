@@ -69,6 +69,12 @@ Keyword arguments:
 - nodesDraggable (boolean; default True):
     Enable/disable node dragging.
 
+- selectedEdges (list of strings; optional):
+    The selected Edges.
+
+- selectedNodes (list of strings; optional):
+    The selected Nodes.
+
 - showBackground (boolean; default True):
     Show/hide background.
 
@@ -88,10 +94,10 @@ Keyword arguments:
     _namespace = 'dash_flow'
     _type = 'DashFlow'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, nodes=Component.UNDEFINED, edges=Component.UNDEFINED, nodesDraggable=Component.UNDEFINED, nodesConnectable=Component.UNDEFINED, elementsSelectable=Component.UNDEFINED, nodeTypes=Component.UNDEFINED, edgeTypes=Component.UNDEFINED, showMiniMap=Component.UNDEFINED, showControls=Component.UNDEFINED, showBackground=Component.UNDEFINED, style=Component.UNDEFINED, className=Component.UNDEFINED, showDevTools=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'className', 'edgeTypes', 'edges', 'elementsSelectable', 'nodeTypes', 'nodes', 'nodesConnectable', 'nodesDraggable', 'showBackground', 'showControls', 'showDevTools', 'showMiniMap', 'style']
+    def __init__(self, id=Component.UNDEFINED, nodes=Component.UNDEFINED, edges=Component.UNDEFINED, nodesDraggable=Component.UNDEFINED, nodesConnectable=Component.UNDEFINED, elementsSelectable=Component.UNDEFINED, nodeTypes=Component.UNDEFINED, edgeTypes=Component.UNDEFINED, showMiniMap=Component.UNDEFINED, showControls=Component.UNDEFINED, showBackground=Component.UNDEFINED, style=Component.UNDEFINED, className=Component.UNDEFINED, showDevTools=Component.UNDEFINED, selectedNodes=Component.UNDEFINED, selectedEdges=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'className', 'edgeTypes', 'edges', 'elementsSelectable', 'nodeTypes', 'nodes', 'nodesConnectable', 'nodesDraggable', 'selectedEdges', 'selectedNodes', 'showBackground', 'showControls', 'showDevTools', 'showMiniMap', 'style']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'className', 'edgeTypes', 'edges', 'elementsSelectable', 'nodeTypes', 'nodes', 'nodesConnectable', 'nodesDraggable', 'showBackground', 'showControls', 'showDevTools', 'showMiniMap', 'style']
+        self.available_properties = ['id', 'className', 'edgeTypes', 'edges', 'elementsSelectable', 'nodeTypes', 'nodes', 'nodesConnectable', 'nodesDraggable', 'selectedEdges', 'selectedNodes', 'showBackground', 'showControls', 'showDevTools', 'showMiniMap', 'style']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

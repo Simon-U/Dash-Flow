@@ -33,6 +33,8 @@ Those elements have the following types:
   - `style` (Dict; optional)s
 - `nodesConnectable` (Bool; optional): Enable/disable creating new connections
 - `nodesDraggable` (Bool; optional): Enable/disable node dragging
+- `selectedEdges` (Array of Strings; optional): The selected Edges
+- `selectedNodes` (Array of Strings; optional): The selected Nodes
 - `showBackground` (Bool; optional): Show/hide background
 - `showControls` (Bool; optional): Show/hide controls
 - `showDevTools` (Bool; optional): Show/hide developer tools
@@ -40,7 +42,7 @@ Those elements have the following types:
 - `style` (Dict; optional): Custom style for the container div
 """
 function df_dashflow(; kwargs...)
-        available_props = Symbol[:id, :className, :edgeTypes, :edges, :elementsSelectable, :nodeTypes, :nodes, :nodesConnectable, :nodesDraggable, :showBackground, :showControls, :showDevTools, :showMiniMap, :style]
+        available_props = Symbol[:id, :className, :edgeTypes, :edges, :elementsSelectable, :nodeTypes, :nodes, :nodesConnectable, :nodesDraggable, :selectedEdges, :selectedNodes, :showBackground, :showControls, :showDevTools, :showMiniMap, :style]
         wild_props = Symbol[]
         return Component("df_dashflow", "DashFlow", "dash_flow", available_props, wild_props; kwargs...)
 end

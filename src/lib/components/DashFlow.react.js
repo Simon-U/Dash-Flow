@@ -264,6 +264,8 @@ DashFlow.defaultProps = {
     style: {},
     className: '',
     showDevTools: false,
+    selectedNodes: [],
+    selectedEdges: [],
 
 };
 
@@ -358,6 +360,15 @@ DashFlow.propTypes = {
      * Show/hide developer tools
      */
     showDevTools: PropTypes.bool,
+
+    /**
+     * The selected Nodes
+     */
+    selectedNodes: PropTypes.arrayOf(PropTypes.string),
+     /**
+     * The selected Edges
+     */
+    selectedEdges: PropTypes.arrayOf(PropTypes.string),
 };
 
 // Add this to register the component name

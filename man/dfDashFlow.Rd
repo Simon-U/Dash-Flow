@@ -13,8 +13,9 @@
 dfDashFlow(id=NULL, className=NULL, edgeTypes=NULL, edges=NULL,
 elementsSelectable=NULL, nodeTypes=NULL, nodes=NULL,
 nodesConnectable=NULL, nodesDraggable=NULL,
-showBackground=NULL, showControls=NULL, showDevTools=NULL,
-showMiniMap=NULL, style=NULL)
+selectedEdges=NULL, selectedNodes=NULL, showBackground=NULL,
+showControls=NULL, showDevTools=NULL, showMiniMap=NULL,
+style=NULL)
 }
 
 \arguments{
@@ -51,6 +52,10 @@ those elements have the following types:
 \item{nodesConnectable}{Logical. Enable/disable creating new connections}
 
 \item{nodesDraggable}{Logical. Enable/disable node dragging}
+
+\item{selectedEdges}{List of characters. The selected Edges}
+
+\item{selectedNodes}{List of characters. The selected Nodes}
 
 \item{showBackground}{Logical. Show/hide background}
 
