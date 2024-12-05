@@ -158,6 +158,14 @@ const Flow = (props) => {
         setRfInstance(instance);
     }, []);
 
+    // Handle selection changes
+    const onSelectionChange = useCallback(({ nodes, edges }) => {
+            setProps({
+                selectedNodes: nodes.map(node => node.id),
+                selectedEdges: edges.map(edge => edge.id)
+            });
+    }, [setProps]);
+    
     // Effect to fit view when nodes/edges change
     useEffect(() => {
         if (rfInstance && (nodes.length > 0 || edges.length > 0)) {
@@ -210,6 +218,7 @@ const Flow = (props) => {
                 edges={edges}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
+                onSelectionChange={onSelectionChange}
                 onConnect={onConnect}
                 nodesDraggable={nodesDraggable}
                 nodesConnectable={nodesConnectable}
