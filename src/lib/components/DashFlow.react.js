@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import {
     ReactFlow,
@@ -149,6 +150,19 @@ const Flow = (props) => {
         ...customNodeTypes,
     };
 
+    // Add ref for ReactFlow instance
+    const reactFlowInstance = useRef(null);
+
+    // Effect to fit view when nodes or edges change
+    useEffect(() => {
+            if (reactFlowInstance.current && (nodes.length > 0 || edges.length > 0)) {
+                reactFlowInstance.current.fitView({
+                    padding: 0.2,  // Add some padding around the elements
+                    duration: 200  // Smooth animation duration in ms
+                });
+            }
+        }, [nodes, edges]);
+    
     // Process nodes to handle Dash components
     const processedNodes = processDashComponents(nodes);
     const viewport = useViewport();
@@ -184,6 +198,7 @@ const Flow = (props) => {
     return (
         <div id={id} style={containerStyle} className={className}>
             <ReactFlow
+                ref={reactFlowInstance} 
                 nodes={processedNodes}
                 edges={edges}
                 onNodesChange={onNodesChange}
