@@ -150,48 +150,47 @@ const Flow = (props) => {
         ...customNodeTypes,
     };
 
-    // Add ref for ReactFlow instance
-    const [rfInstance, setRfInstance] = useState(null);
-
-    // Handle initialization
     const onInit = useCallback((instance) => {
-        setRfInstance(instance);
+        window.dashFlow = {
+            fitView: () => instance.fitView({
+                padding: 0.2,
+                duration: 200
+            })
+        };
     }, []);
 
-    // Handle selection changes
+    // Modified selection handling logic
     const onSelectionChange = useCallback(({ nodes, edges }) => {
+        if (edges.length > 0) {
             setProps({
-                selectedNodes: nodes.map(node => node),
-                selectedEdges: edges.map(edge => edge)
+                selectedEdges: edges.map(edge => edge.id)
             });
+        } else if (nodes.length > 0) {
+            setProps({
+                selectedNodes: nodes.map(node => node.id)
+            });
+        }
     }, [setProps]);
     
-    // Effect to fit view when nodes/edges change
-    useEffect(() => {
-        if (rfInstance && (nodes.length > 0 || edges.length > 0)) {
-            setTimeout(() => {
-                rfInstance.fitView({
-                    padding: 0.2,
-                    duration: 200
-                });
-            }, 0);
-        }
-    }, [rfInstance, nodes, edges]);
     
     // Process nodes to handle Dash components
     const processedNodes = processDashComponents(nodes);
     const viewport = useViewport();
 
     const onNodesChange = useCallback((changes) => {
-        // Use applyNodeChanges helper from React Flow to correctly update nodes
         const nextNodes = applyNodeChanges(changes, nodes);
-        setProps({ nodes: nextNodes });
+        setProps({ 
+            nodes: nextNodes,
+            selectedNodes: nextNodes.filter(node => node.selected).map(node => node.id)
+        });
     }, [nodes, setProps]);
 
     const onEdgesChange = useCallback((changes) => {
-        // Use applyEdgeChanges helper from React Flow to correctly update edges
         const nextEdges = applyEdgeChanges(changes, edges);
-        setProps({ edges: nextEdges });
+        setProps({ 
+            edges: nextEdges,
+            selectedEdges: nextEdges.filter(edge => edge.selected).map(edge => edge.id)
+        });
     }, [edges, setProps]);
 
     const onConnect = useCallback((connection) => {
