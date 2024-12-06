@@ -163,11 +163,11 @@ const Flow = (props) => {
     const onSelectionChange = useCallback(({ nodes, edges }) => {
         if (edges.length > 0) {
             setProps({
-                selectedEdges: edges.map(edge => edge.id)
+                selectedEdges: edges.map(edge => edge)
             });
         } else if (nodes.length > 0) {
             setProps({
-                selectedNodes: nodes.map(node => node.id)
+                selectedNodes: nodes.map(node => node)
             });
         }
     }, [setProps]);
